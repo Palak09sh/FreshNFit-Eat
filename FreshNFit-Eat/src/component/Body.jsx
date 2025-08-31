@@ -1,10 +1,19 @@
+import { useState } from "react";
 import ReasaurantCard from "./RestaurantCard";
 import resList from "./utils/mockdata";
-const Body = () =>{
+const Body = () =>{``
+    // State Variable- super powerful variable known as hooks
+     const [ListOfResturants,setListOfResturants] =useState(resList)
   return(
   <div className="body">
-    <div className="search">
+    <div className="search-container">
+       <button className="filter-btn" onClick={() => {const filteredList = ListOfResturants.filter((res) => res.info.avgRating>4.5);
+        setListOfResturants(filteredList);
+            
+        }}>Top Rated Resturants</button> 
+           </div>
       <div className="res-container">
+       
       {/* <ReasaurantCard resData = {resList[0]}/>
       <ReasaurantCard resData = {resList[1]}/>
       <ReasaurantCard resData = {resList[2]}/>
@@ -17,13 +26,11 @@ const Body = () =>{
       <ReasaurantCard resData = {resList[9]}/>
       <ReasaurantCard resData = {resList[10]}/> */}
       {
-        resList.map((resturant) => (
+        ListOfResturants.map((resturant) => (
          <ReasaurantCard    key={resturant.info.id} resData = {resturant}/>
         ))
       }
-      
-       
-      </div>
+   
     </div>
   </div>
   )
