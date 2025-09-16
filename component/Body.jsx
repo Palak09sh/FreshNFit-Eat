@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReasaurantCard from "./RestaurantCard";
-import resList from "./utils/mockdata";
 const Body = () =>{``
     // State Variable- super powerful variable known as hooks
-     const [ListOfResturants,setListOfResturants] =useState(resList)
+     const [ListOfResturants,setListOfResturants] =useState([])
+     useEffect(() => {fetchData();
+     },[])
+     const fetchData = async () =>  {
+      const info = fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=13.0843007&lng=80.2704622&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+      const json = await info.json();
+      setListOfResturants(json.info)
+     }
   return(
   <div className="body">
     <div className="search-container">
